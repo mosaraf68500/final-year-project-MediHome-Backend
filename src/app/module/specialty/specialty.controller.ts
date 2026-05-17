@@ -1,7 +1,7 @@
 import {  Request,  Response } from "express";
 import { SpecialtyService } from "./specialty.service";
-import catchAsyn from "../shared/CatchAsync";
-import { sendResponse } from "../shared/sendResponse";
+import catchAsyn from "../../shared/CatchAsync";
+import { sendResponse } from "../../shared/sendResponse";
 
 const createSpecialty = catchAsyn(
   async (req:Request,res:Response)=>{
