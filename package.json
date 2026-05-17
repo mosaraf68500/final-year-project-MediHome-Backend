@@ -12,15 +12,15 @@
     "dev": "tsx watch src/server.ts",
     "lint": "eslint \"src/**/*.ts\"",
     "lint:fix": "eslint \"src/**/*.ts\" --fix",
-
-    "migrate":"prisma migrate dev",
-    "generate":"prisma generate",
-    "studio":"prisma studio",
-    "push" :"prisma db push",
-    "pull":"prisma db pull",
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate",
+    "studio": "prisma studio",
+    "push": "prisma db push",
+    "pull": "prisma db pull",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "better-auth": "^1.6.11",
     "express": "^5.2.1"
   },
   "devDependencies": {
