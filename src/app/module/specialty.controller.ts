@@ -1,8 +1,10 @@
-import { Request, Response } from "express";
+import {  Request,  Response } from "express";
 import { SpecialtyService } from "./specialty.service";
+import catchAsyn from "../shared/CatchAsync";
 
-const createSpecialty = async (req: Request, res: Response) => {
-  try {
+const createSpecialty = catchAsyn(
+  async (req:Request,res:Response)=>{
+    
     const Payload = req.body;
 
     const Result = await SpecialtyService.createSpecialty(Payload);
@@ -12,54 +14,28 @@ const createSpecialty = async (req: Request, res: Response) => {
       message: "specialty created successfully",
       data: Result,
     });
-  } catch (error: unknown) {
-    console.error(error);
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : typeof error === "string"
-          ? error
-          : JSON.stringify(error);
-
-    res.status(500).json({
-      success: false,
-      message: "failed to create specialty",
-      error: errorMessage,
-    });
   }
-};
+)
 
 
 
-const getAllSpecialty = async (req: Request, res: Response) => {
-  try {
+
+
+
+const getAllSpecialty = catchAsyn(
+  async(req:Request,res:Response)=>{
     const specialties = await SpecialtyService.getAllSpecialties();
     res.status(200).json({
       success: true,
       message: 'specialties fetched successfully',
       data: specialties,
     });
-  } catch (error: unknown) {
-    console.error(error);
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : typeof error === "string"
-        ? error
-        : JSON.stringify(error);
-
-    res.status(500).json({
-      success: false,
-      message: 'failed to fetch specialties',
-      error: errorMessage,
-    });
   }
-};
+)
 
-const deleteSpecialties=async(req:Request,res:Response)=>{
-
-    try{
-const {id}=req.params;
+const deleteSpecialties= catchAsyn(
+  async(req:Request,res:Response)=>{
+    const {id}=req.params;
 
 const result=await SpecialtyService.deleteSpecialty(id as string);
 res.status(200).json({
@@ -67,30 +43,12 @@ res.status(200).json({
     message:'specialties deleted successfully',
     data:result 
 })
-
-    }catch(error:unknown){
-
-        console.log(error)
-
-        const errorMessage =
-          error instanceof Error
-            ? error.message
-            : typeof error === "string"
-              ? error
-              : JSON.stringify(error);
-
-        res.status(500).json({
-            success:false,
-            message:'failed to delete',
-            error:errorMessage
-        })
-    }
-
-}
+  }
+)
 
 
-const updateSpecialties=async (req:Request,res:Response)=>{
-    try{
+const updateSpecialties=catchAsyn(
+  async(req:Request, res:Response)=>{
 
         const {id}=req.params;
         const Payload=req.body;
@@ -100,27 +58,8 @@ const updateSpecialties=async (req:Request,res:Response)=>{
             message:"updated specialties successfully",
             data:result
         })
-
-    }
-
-    catch(error: unknown){
-        console.log(error);
-
-        const errorMessage =
-          error instanceof Error
-            ? error.message
-            : typeof error === "string"
-              ? error
-              : JSON.stringify(error);
-
-        res.status(500).json({
-            success:false,
-            message:'updated failed specialties',
-            error: errorMessage
-        })
-    }
-
-}
+  }
+)
 
 
 export const SpecialtyController = {

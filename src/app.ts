@@ -1,31 +1,20 @@
-import { prisma } from './app/lib/prisma';
 import express , { Application, Request, Response } from "express";
 import { IndexRoutes } from './app/routes';
 
-
-const app:Application= express();
+const app: Application = express();
 
 app.use(express.urlencoded({ extended: true }));
-
-
 app.use(express.json());
 
+// সব মেইন এপিআই রাউট এখানে চলে যাবে (যেমন: /api/v1/specialties)
+app.use("/api/v1", IndexRoutes);
 
-app.use("/api/v1",IndexRoutes)
-
-
-app.get('/',async (req: Request, res: Response) => {
-  const Specialty= await prisma.specialty.create({
-    data:{
-      title:"dasdfasdf"
-    }
-  })
-  res.status(201).json({
-    success:true,
-    message :"api is working",
-    data:Specialty
-  })
+// হোম রুটটি শুধু এপিআই সচল আছে কিনা তা চেক করবে
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({
+    success: true,
+    message: "MediHome Backend API is working perfectly!"
+  });
 });
-
 
 export default app;
