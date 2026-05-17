@@ -1,5 +1,7 @@
 import express , { Application, Request, Response } from "express";
 import { IndexRoutes } from './app/routes';
+import { globalErrorHander } from "./app/middleware/globalErrorHandler";
+import { notFound } from "./app/middleware/notFoundf";
 
 const app: Application = express();
 
@@ -16,5 +18,9 @@ app.get('/', (req: Request, res: Response) => {
     message: "MediHome Backend API is working perfectly!"
   });
 });
+
+
+app.use(globalErrorHander);
+app.use(notFound);
 
 export default app;
