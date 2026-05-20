@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import status from "http-status";
 import { Role, Specialty } from "../../../generated/prisma/client";
-import AppError from "../../errorHelpers/AppError";
+
 import { auth } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import {  ICreateDoctorPayload } from "./user.interface";
+import AppError from "../../middleware/AppError";
 
 const createDoctor = async (payload: ICreateDoctorPayload) => {
 
