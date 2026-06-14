@@ -42,7 +42,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
             password: payload.password,
             role: Role.DOCTOR,
             name: payload.doctor.name,
-            needPasswordChange: "true",
+            needPasswordChange: true,
         }
     })
 
@@ -86,6 +86,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
                     qualification: true,
                     currentWorkingPlace: true,
                     designation: true,
+                   
                     createdAt: true,
                     updatedAt: true,
                     user: {
@@ -103,7 +104,7 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
                             updatedAt: true,
                         }
                     },
-                    specialties: {
+                    doctorSpecialties: {
                         select: {
                             specialty: {
                                 select: {
@@ -119,7 +120,6 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
             return doctor;
 
         })
-
         return result;
     } catch (error) {
         console.log("Transaction error : ", error);
