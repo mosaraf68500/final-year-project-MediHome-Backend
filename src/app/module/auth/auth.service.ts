@@ -91,7 +91,7 @@ const loginUser = async(payload : ILoginUserPayload)=>{
 
     return data;
 
-    return data;
+   
 }
 
 
