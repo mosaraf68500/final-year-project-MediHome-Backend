@@ -1,7 +1,9 @@
-import { Request, Response, Router, NextFunction } from 'express';
+
 import UserController from "./user.controller";
 import z from 'zod';
 import { Gender } from '../../../generated/prisma/enums';
+import { validateRequest } from '../../middleware/validateRequest';
+import { Router } from "express";
 
 const createDoctorZodSchema = z.object({
     password: z.string().min(6,"Password must be at least 6 characters long").max(20,"Password must be less than 20 characters long"),
@@ -30,18 +32,6 @@ const createDoctorZodSchema = z.object({
 
 const router = Router();
 
-router.post("/create-doctor", (req: Request, res: Response, next: NextFunction) => { 
-   
-    const parseResult = createDoctorZodSchema.safeParse(req.body);
-
-    if (!parseResult.success) {
-       // return যোগ করা হয়েছে যাতে এরর হলে এখানেই কোড থেমে যায়
-       return next(parseResult.error);
-    }
-
-   req.body = parseResult.data;
-   next();
-
-}, UserController.createDoctor);
+router.post("/create-doctor", validateRequest(createDoctorZodSchema)    , UserController.createDoctor);
 
 export const UserRouters = router;
