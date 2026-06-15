@@ -133,7 +133,6 @@ const createDoctor = async (payload: ICreateDoctorPayload) => {
 }
 
 // const createAdmin = async (payload: ICreateAdminPayload) => {
-//     //TODO: Validate who is creating the admin user. Only super admin can create admin user and only super admin can create super admin user but admin user cannot create super admin user
 
 //     const userExists = await prisma.user.findUnique({
 //         where: {
