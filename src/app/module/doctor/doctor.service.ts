@@ -57,7 +57,6 @@ const deleteDoctor = async (id: string) => {
     return deletedDoctor;
 }
 
-
 export const DoctorService = {
     getAllDoctors,
     getDoctorById,

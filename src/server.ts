@@ -9,7 +9,7 @@ app.listen(EnvVariable.PORT, () => {
   console.log(`Server is running on http://localhost:${EnvVariable.PORT}`);
 });
     }catch(error){
-        console.log(`faild to start server `, error);
+        console.log(`faild to start server  `, error);
     }
 }
 
